@@ -9,32 +9,28 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #f4f4f4;
         }
         .container {
             width: 80%;
             margin: 50px auto;
             background-color: #fff;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
             text-align: center;
-            margin-bottom: 30px;
-            color: #333;
         }
         form {
             margin-top: 20px;
         }
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
         }
         input[type="text"], input[type="email"], select {
             width: 100%;
@@ -43,50 +39,28 @@
             border-radius: 5px;
             box-sizing: border-box;
             margin-top: 5px;
-            font-size: 16px;
         }
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s;
         }
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-top: 5px;
-            font-size: 16px;
-            color: #555;
-        }
-        .info-container {
+        #details {
             display: none;
-            margin-top: 30px;
-        }
-        .info {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .info p {
-            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Student Registration Form</h2>
-        <form id="registrationForm" onsubmit="displayInfo(event)">
+        <form id="registrationForm" onsubmit="displayDetails(event)">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -114,30 +88,32 @@
                 <input type="submit" value="Submit">
             </div>
         </form>
-
-        <div class="info-container" id="infoContainer">
+        <div id="details">
             <h2>Registration Details</h2>
-            <div class="info" id="info">
+            <div>
+                <p><strong>Name:</strong> <span id="nameDisplay"></span></p>
+                <p><strong>Email:</strong> <span id="emailDisplay"></span></p>
+                <p><strong>Department:</strong> <span id="departmentDisplay"></span></p>
+                <p><strong>Year of Study:</strong> <span id="yearDisplay"></span></p>
             </div>
         </div>
     </div>
 
     <script>
-        function displayInfo(event) {
+        function displayDetails(event) {
             event.preventDefault();
             var name = document.getElementById("name").value;
             var email = document.getElementById("email").value;
             var department = document.getElementById("department").value;
             var year = document.getElementById("year").value;
 
-            var infoContainer = document.getElementById("infoContainer");
-            var infoDiv = document.getElementById("info");
-            infoDiv.innerHTML = "<p><strong>Name:</strong> " + name + "</p>" +
-                                "<p><strong>Email:</strong> " + email + "</p>" +
-                                "<p><strong>Department:</strong> " + department + "</p>" +
-                                "<p><strong>Year of Study:</strong> " + year + "</p>";
+            document.getElementById("nameDisplay").textContent = name;
+            document.getElementById("emailDisplay").textContent = email;
+            document.getElementById("departmentDisplay").textContent = department;
+            document.getElementById("yearDisplay").textContent = year;
 
-            infoContainer.style.display = "block";
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("details").style.display = "block";
         }
     </script>
 </body>
