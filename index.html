@@ -107,7 +107,7 @@
   <div class="container">
     <h1 class="text-center">Student Information Form</h1>
     <hr>
-    <form>
+    <form action="javascript:void(0);" onsubmit="submitForm()">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter name">
@@ -164,17 +164,61 @@
     </form>
   </div>
   
+  <div class="container" id="submitted-info" style="display: none;">
+    <h1 class="text-center">Submitted Information</h1>
+    <hr>
+    <!-- Display submitted information here -->
+    <div id="submitted-data"></div>
+    <button onclick="goBack()" class="btn btn-primary">Go Back</button>
+  </div>
+  
   <!-- jQuery and Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Script for dropdown behavior -->
   <script>
     var anchor = document.getElementById('hobbies-anchor');
     var items = document.getElementById('hobbies');
     anchor.addEventListener('click', function() {
       items.classList.toggle('visible');
     });
+
+    function submitForm() {
+      var name = document.getElementById('name').value;
+      var age = document.getElementById('age').value;
+      var department = document.getElementById('department').value;
+      var hobbies = [];
+      var hobbyCheckboxes = document.querySelectorAll('#hobbies input[type="checkbox"]:checked');
+      hobbyCheckboxes.forEach(function(checkbox) {
+        hobbies.push(checkbox.value);
+      });
+      var phoneNumber = document.getElementById('number').value;
+      var address = document.getElementById('address').value;
+      var dob = document.getElementById('dob').value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+
+      // Prepare submitted data
+      var submittedData = `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Department:</strong> ${department}</p>
+        <p><strong>Hobbies:</strong> ${hobbies.join(', ')}</p>
+        <p><strong>Phone Number:</strong> ${phoneNumber}</p>
+        <p><strong>Address:</strong> ${address}</p>
+        <p><strong>Date of Birth:</strong> ${dob}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+      `;
+
+      // Display submitted data
+      document.getElementById('submitted-data').innerHTML = submittedData;
+
+      // Hide form, show submitted info
+      document.getElementById('submitted-info').style.display = 'block';
+      document.querySelector('form').style.display = 'none';
+    }
+
+    function goBack() {
+      window.history.back();
+    }
   </script>
 </body>
 </html>
