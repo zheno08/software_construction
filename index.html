@@ -1,141 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Registration Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-        }
-        form {
-            margin-top: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="email"], select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-top: 5px;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        #details {
-            display: none;
-        }
-        /* Styling for the details page */
-        #details {
-            margin-top: 30px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #details h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        #details p {
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        #details p strong {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Information Form</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-image: url('/img/bak.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      width: 100%;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+    .form-group label {
+      font-weight: bold;
+      color: #555;
+    }
+    .form-control {
+      border-radius: 5px;
+      box-shadow: none;
+      background-color: #f8f9fa;
+    }
+    textarea.form-control {
+      resize: none;
+    }
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .container h1 {
+      color: #007bff;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .dropdown-check-list {
+      display: inline-block;
+    }
+    .dropdown-check-list .anchor {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      padding: 5px 50px 5px 10px;
+      border: 1px solid #ccc;
+    }
+    .dropdown-check-list .anchor:after {
+      position: absolute;
+      content: "";
+      border-left: 2px solid black;
+      border-top: 2px solid black;
+      padding: 5px;
+      right: 10px;
+      top: 20%;
+      -moz-transform: rotate(-135deg);
+      -ms-transform: rotate(-135deg);
+      -o-transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+    }
+    .dropdown-check-list .anchor:active:after {
+      right: 8px;
+      top: 21%;
+    }
+    .dropdown-check-list .items {
+      padding: 2px;
+      display: none;
+      margin: 0;
+      border: 1px solid #ccc;
+      border-top: none;
+      position: absolute;
+      width: 100%;
+      z-index: 1000;
+      background-color: #fff;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .dropdown-check-list.visible .items {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Student Registration Form</h2>
-        <form id="registrationForm" onsubmit="displayDetails(event)">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="department">Department:</label>
-                <select id="department" name="department" required>
-                    <option value="">Select Department</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Business">Business</option>
-                    <option value="Mathematics">Mathematics</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="year">Year of Study:</label>
-                <input type="text" id="year" name="year" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit">
-            </div>
-        </form>
-        <div id="details">
-            <h2>Registration Details</h2>
-            <div>
-                <p><strong>Name:</strong> <span id="nameDisplay"></span></p>
-                <p><strong>Email:</strong> <span id="emailDisplay"></span></p>
-                <p><strong>Department:</strong> <span id="departmentDisplay"></span></p>
-                <p><strong>Year of Study:</strong> <span id="yearDisplay"></span></p>
-            </div>
+  <div class="container">
+    <h1 class="text-center">Student Information Form</h1>
+    <hr>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name">
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" placeholder="Enter age">
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <select class="form-control" id="department">
+          <option value="" selected disabled>Select Department</option>
+          <option value="soft_eng">Software Engineering</option>
+          <option value="net">Network Engineering</option>
+          <option value="bio_kids">Biological Sciences for Kids</option>
+        </select>
+      </div>
+      <div class="form-group dropdown-check-list">
+        <label class="d-block">Hobbies</label>
+        <div class="anchor" id="hobbies-anchor">Select Hobbies</div>
+        <ul class="items" id="hobbies">
+          <li><input type="checkbox" value="reading">Reading</li>
+          <li><input type="checkbox" value="sports">Sports</li>
+          <li><input type="checkbox" value="music">Music</li>
+          <!-- Add more hobby options here -->
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="number">Phone Number</label>
+        <input type="tel" class="form-control" id="number" placeholder="Enter phone number">
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="text" class="form-control" id="dob" placeholder="Select date">
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+            <label class="form-check-label" for="female">Female</label>
+          </div>
         </div>
-    </div>
-
-    <script>
-        function displayDetails(event) {
-            event.preventDefault();
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var department = document.getElementById("department").value;
-            var year = document.getElementById("year").value;
-
-            document.getElementById("nameDisplay").textContent = name;
-            document.getElementById("emailDisplay").textContent = email;
-            document.getElementById("departmentDisplay").textContent = department;
-            document.getElementById("yearDisplay").textContent = year;
-
-            document.getElementById("registrationForm").style.display = "none";
-            document.getElementById("details").style.display = "block";
-        }
-    </script>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
+  <!-- jQuery and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Script for dropdown behavior -->
+  <script>
+    var anchor = document.getElementById('hobbies-anchor');
+    var items = document.getElementById('hobbies');
+    anchor.addEventListener('click', function() {
+      items.classList.toggle('visible');
+    });
+  </script>
 </body>
 </html>
