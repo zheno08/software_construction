@@ -169,7 +169,7 @@
     <hr>
     <!-- Display submitted information here -->
     <div id="submitted-data"></div>
-    <button onclick="goBack()" class="btn btn-primary">Go Back</button>
+    <button onclick="editInfo()" class="btn btn-primary">Edit</button>
   </div>
   
   <!-- jQuery and Bootstrap JS -->
@@ -216,10 +216,10 @@
       document.querySelector('form').style.display = 'none';
     }
 
-    function goBack() {
-      window.history.back();
+    function editInfo() {
+      document.getElementById('submitted-info').style.display = 'none';
+      document.querySelector('form').style.display = 'block';
     }
   </script>
 </body>
 </html>
-
